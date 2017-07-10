@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mr.bst.ui.activity.TPSaveDataActivity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TableRow
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="压差"
+                android:textSize="18sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/diff_press"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="0"
+                android:textSize="18sp">
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="柜内负压平均值"
+                android:textSize="18sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/press_ave"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:numeric="integer"
+                android:text="0"
+                android:textSize="18sp">
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="开机前温度"
+                android:textSize="18sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/start_press"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:numeric="integer"
+                android:text="0"
+                android:textSize="18sp">
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="开机后温度"
+                android:textSize="18sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/after_temp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:numeric="integer"
+                android:text="0"
+                android:textSize="18sp">
+            </EditText>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="温升"
+                android:textSize="18sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/raised_temp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:numeric="integer"
+                android:text="0"
+                android:textSize="18sp">
+            </EditText>
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保存数据"/>
+    </LinearLayout>
+</LinearLayout>

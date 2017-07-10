@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mr.bst.ui.activity.TPActivity">
+
+    <include layout="@layout/toolbar"/>
+
+    <com.mr.bst.widget.DampingScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tp_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white"
+                android:paddingBottom="@dimen/dp_5"
+                android:paddingTop="@dimen/dp_5"
+                app:tabIndicatorColor="@color/appPrimaryColor"
+                app:tabIndicatorHeight="2dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@android:color/black"
+                app:tabTextColor="@android:color/darker_gray"/>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/tp_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="400dp">
+
+            </android.support.v4.view.ViewPager>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/temp_now_data"/>
+
+                    <EditText
+                        android:id="@+id/now_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pressure_now_data"/>
+
+                    <EditText
+                        android:id="@+id/now_pressure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/before_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/start_before_temp"/>
+
+                <Button
+                    android:id="@+id/recode_data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/write_data"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TableRow
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="压差"
+                        android:textSize="18sp">
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/diff_press"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="0"
+                        android:textSize="18sp">
+                    </EditText>
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="柜内负压平均值"
+                        android:textSize="18sp">
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/press_ave"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:numeric="integer"
+                        android:text="0"
+                        android:textSize="18sp">
+                    </EditText>
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="开机前温度"
+                        android:textSize="18sp">
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/start_temp"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:numeric="integer"
+                        android:text="0"
+                        android:textSize="18sp">
+                    </EditText>
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="开机后温度"
+                        android:textSize="18sp">
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/after_temp"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:numeric="integer"
+                        android:text="0"
+                        android:textSize="18sp">
+                    </EditText>
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="温升"
+                        android:textSize="18sp">
+                    </TextView>
+
+                    <EditText
+                        android:id="@+id/raised_temp"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:numeric="integer"
+                        android:text="0"
+                        android:textSize="18sp">
+                    </EditText>
+                </TableRow>
+            </TableLayout>
+            <Button
+                android:id="@+id/save_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="确认当前数据"/>
+        </LinearLayout>
+    </com.mr.bst.widget.DampingScrollView>
+</LinearLayout>

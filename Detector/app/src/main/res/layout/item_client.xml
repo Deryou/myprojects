@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/item_view"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:background="#00000000"
+          android:clickable="true"
+          android:descendantFocusability="blocksDescendants"
+          android:gravity="center_vertical"
+          android:padding="1dp"
+          android:textColor="@drawable/itemcolor"
+          android:textSize="15sp" >
+
+</TextView>

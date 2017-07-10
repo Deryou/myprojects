@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/data_clear"
+        android:title="清理视图"
+        android:icon="@mipmap/icon_data_clear"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/create_report"
+        android:title="生成报表"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/check_report"
+        android:title="查看报表"
+        app:showAsAction="never"
+        />
+</menu>

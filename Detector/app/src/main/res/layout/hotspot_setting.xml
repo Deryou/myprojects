@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_gravity="center"
+             android:orientation="vertical">
+
+    <TableRow
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="热点名称："
+            android:textSize="18sp">
+        </TextView>
+
+        <EditText
+            android:id="@+id/hotspot_name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="MR-BST"
+            android:textSize="18sp">
+        </EditText>
+    </TableRow>
+
+    <TableRow
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="热点密码："
+            android:textSize="18sp">
+        </TextView>
+
+        <EditText
+            android:id="@+id/hotspot_pwd"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:numeric="integer"
+            android:text="123456789"
+            android:textSize="18sp">
+        </EditText>
+    </TableRow>
+</TableLayout>

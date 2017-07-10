@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/data_clear"
+        android:title="数据清理"
+        android:icon="@mipmap/icon_data_clear"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/data_refresh"
+        android:title="刷新"
+        android:icon="@mipmap/icon_refresh"
+        app:showAsAction="always"
+        />
+</menu>

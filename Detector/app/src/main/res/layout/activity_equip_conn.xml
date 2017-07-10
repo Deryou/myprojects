@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragmentBgColor"
+    tools:context="com.mr.detector.ui.activity.EquipConnActivity">
+
+    <include layout="@layout/toolbar"/>
+
+
+    <RelativeLayout
+        android:id="@+id/wlan_contain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@android:color/white"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:text="开启WLAN"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/sp_18"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/wifi_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_20"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/wifi_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/wlan_contain"
+        android:layout_marginTop="@dimen/dp_20"
+        android:background="@android:color/white">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>
