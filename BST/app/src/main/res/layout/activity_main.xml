@@ -18,15 +18,15 @@
         android:text="@string/equip_setting"
         android:textSize="@dimen/sp_20"/>
 
-    <Button
-        android:id="@+id/equip_correct"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/dp_30"
-        android:background="@drawable/oval_shape"
-        android:text="@string/equip_correct"
-        android:textSize="@dimen/sp_20"/>
+    <!--<Button-->
+        <!--android:id="@+id/equip_correct"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:layout_marginTop="@dimen/dp_30"-->
+        <!--android:background="@drawable/oval_shape"-->
+        <!--android:text="@string/equip_correct"-->
+        <!--android:textSize="@dimen/sp_20"/>-->
 
     <Button
         android:id="@+id/temp_press_test"

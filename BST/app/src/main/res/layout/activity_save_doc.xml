@@ -31,6 +31,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
+                    android:text="唯一性号:"
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_unique_num"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
                     android:text="委托单位:"
                     android:textSize="@dimen/sp_18"/>
 
@@ -38,6 +63,9 @@
                     android:id="@+id/form_company"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
                     android:background="@drawable/white_background_oval_shape"
                     android:layout_marginLeft="@dimen/dp_20"/>
             </LinearLayout>
@@ -61,6 +89,10 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_20"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_equip_name"
+                    android:inputType="none"
                     android:background="@drawable/white_background_oval_shape"
                     android:text=""/>
             </LinearLayout>
@@ -84,6 +116,9 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_20"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_factory_serial_num"
                     android:background="@drawable/white_background_oval_shape"
                     android:text=""/>
             </LinearLayout>
@@ -106,6 +141,9 @@
                     android:id="@+id/form_factory_serial_num"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_equip_number"
                     android:background="@drawable/white_background_oval_shape"
                     android:layout_marginLeft="@dimen/dp_20"/>
             </LinearLayout>
@@ -130,6 +168,9 @@
                     android:id="@+id/form_equip_number"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_manufacturer"
                     android:background="@drawable/white_background_oval_shape"
                     android:layout_marginLeft="@dimen/dp_20"/>
             </LinearLayout>
@@ -152,6 +193,8 @@
                     android:id="@+id/form_manufacturer"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
                     android:background="@drawable/white_background_oval_shape"
                     android:layout_marginLeft="@dimen/dp_20"/>
             </LinearLayout>
@@ -174,6 +217,9 @@
                     android:id="@+id/form_equip_type"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
                     android:background="@drawable/white_background_oval_shape"
                     android:layout_marginLeft="@dimen/dp_20"/>
             </LinearLayout>
@@ -196,6 +242,9 @@
                     android:id="@+id/form_correct_degree"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
                     android:background="@drawable/white_background_oval_shape"
                     android:layout_marginLeft="@dimen/dp_20"/>
             </LinearLayout>
@@ -218,6 +267,9 @@
                     android:id="@+id/form_test_pot"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
                     android:background="@drawable/white_background_oval_shape"
                     android:layout_marginLeft="@dimen/dp_20"/>
             </LinearLayout>
@@ -233,13 +285,471 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
-                    android:text="依据:"
+                    android:text="依据:        "
                     android:textSize="@dimen/sp_18"/>
 
                 <EditText
                     android:id="@+id/form_according"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:text="YY 0569-2011"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="准确度等级:"
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_accuracy_degree"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="室温:"
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_temp"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:text="℃"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:textSize="@dimen/sp_18"
+                    android:text="湿度："/>
+                <EditText
+                    android:id="@+id/form_humdity"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/white_background_oval_shape"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:text="%RH"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="其他:"
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_other"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="外观检查"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true">
+                    <RadioButton
+                        android:id="@+id/wg_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:checked="true"
+                        android:text="符合"/>
+                    <RadioButton
+                        android:id="@+id/wg_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:text="不符合"/>
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="滤膜上采样点的数量"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true">
+                    <RadioButton
+                        android:id="@+id/cyd_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:checked="true"
+                        android:text="符合"/>
+                    <RadioButton
+                        android:id="@+id/cyd_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:text="不符合"/>
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="前窗操作报警"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true">
+                    <RadioButton
+                        android:id="@+id/qcbj_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:checked="true"
+                        android:text="符合"/>
+                    <RadioButton
+                        android:id="@+id/qcbj_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:text="不符合"/>
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="供排气风机连锁报警"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true">
+                    <RadioButton
+                        android:id="@+id/gfbj_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:checked="true"
+                        android:text="符合"/>
+                    <RadioButton
+                        android:id="@+id/gfbj_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:text="不符合"/>
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="安全柜排气报警"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true">
+                    <RadioButton
+                        android:id="@+id/pqbj_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:checked="true"
+                        android:text="符合"/>
+                    <RadioButton
+                        android:id="@+id/pqbj_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:text="不符合"/>
+                </RadioGroup>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_10">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sp_18"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="安全柜气流波动报警"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true">
+                    <RadioButton
+                        android:id="@+id/bdbj_yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:checked="true"
+                        android:text="符合"/>
+                    <RadioButton
+                        android:id="@+id/bdbj_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_18"
+                        android:text="不符合"/>
+                </RadioGroup>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="检定结论:    "
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_test_result"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="有效期:        "
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_period_data"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="校准结论： "
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_calibrate_result"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="建议校准周期:"
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_calibrate_data"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="CNAS认可："
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_cnas"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="检校人员:    "
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_test_person"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
+                    android:background="@drawable/white_background_oval_shape"
+                    android:layout_marginLeft="@dimen/dp_20"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="核验人员:    "
+                    android:textSize="@dimen/sp_18"/>
+
+                <EditText
+                    android:id="@+id/form_check_person"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:imeOptions="actionNext"
+                    android:nextFocusForward="@+id/form_address"
                     android:background="@drawable/white_background_oval_shape"
                     android:layout_marginLeft="@dimen/dp_20"/>
             </LinearLayout>

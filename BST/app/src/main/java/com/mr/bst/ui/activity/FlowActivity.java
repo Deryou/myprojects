@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
 import com.github.mikephil.charting.charts.LineChart;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.mr.bst.R;
 import com.mr.bst.adapter.FlowDataAdapter;
 import com.mr.bst.gloable.AppConstant;
@@ -27,7 +26,6 @@ import com.mr.bst.util.TcpClient;
 import com.mr.bst.util.Util;
 import com.sdsmdg.tastytoast.TastyToast;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +64,10 @@ public class FlowActivity extends BaseChartActivity {
     @BindView(R.id.flow_switch)
     Switch mFlowSwitch;
     float sum = 0, ave = 0;
+    @BindView(R.id.down_ave)
+    TextView mDownAve;
+    @BindView(R.id.up_ave)
+    TextView mUpAve;
 
     private List<List<float[]>> upFlowList = new ArrayList<>();
     private List<List<float[]>> downFlowList = new ArrayList<>();
@@ -74,11 +76,11 @@ public class FlowActivity extends BaseChartActivity {
     private float[] cFlowData = new float[4];
     private List<float[]> mFlowDown;
     private List<float[]> mFlowUp;
-    private float[] mFlowData = new float[4];
+    private float[] mFlowData = new float[3];
     private float[] mDistance = new float[2];
     private boolean isUpFlow = true;
     private int getPointNum = 7;
-    private Map<String,String> dataMap;
+    private Map<String, String> dataMap;
 
     private FlowDataAdapter mFlowUpAdapter, mFlowDownAdapter;
     private ItemTouchHelper mFlowUpHelper, mFlowDownHelper;
@@ -244,6 +246,7 @@ public class FlowActivity extends BaseChartActivity {
         synchronized (obj) {
             msg = Message.obtain();
             String sendData = new String(data);
+            Log.d(TAG, "OnDataReceived: " + sendData);
 
             if (sendData.contains("++")) {
                 String subData = sendData.split("\\+\\+")[0];
@@ -261,15 +264,15 @@ public class FlowActivity extends BaseChartActivity {
                     msg.what = 4;
                 }
             } else if (sendData.trim().endsWith("end")) {
-                if (!isDistance) {
+                if (!isDistance && sendData.trim().contains("F")) {
                     mFlowData = Util.getFlowData(sendData);
-                    for (int i = 0; i < 3; i++) {
-                        sum += mFlowData[i];
-                    }
-                    ave = ((sum / 3f) * 1000) / 1000f;
-                    mFlowData[4] = ave;
+//                    for (int i = 0; i < 3; i++) {
+//                        sum += mFlowData[i];
+//                    }
+//                    ave = ((sum / 3f) * 1000) / 1000f;
+//                    mFlowData[4] = ave;
                     msg.what = 1;
-                } else {
+                } else if (sendData.trim().contains("L")) {
                     mDistance = Util.getDistanceData(sendData);
                     msg.what = 3;
                 }
@@ -300,8 +303,8 @@ public class FlowActivity extends BaseChartActivity {
                 mAddTextPot.setVisibility(View.VISIBLE);
                 synchronized (obj) {
                     isDistance = false;
+                    sendData();
                 }
-                sendData();
                 break;
             case R.id.add_text_pot:
                 mAddTextPot.setVisibility(View.GONE);
@@ -311,28 +314,93 @@ public class FlowActivity extends BaseChartActivity {
                 break;
             case R.id.save_data:
                 dataMap = new HashMap<>();
+
+                List<Float> dataUpList = new ArrayList<>();
+                List<Float> dataDownList = new ArrayList<>();
+                float tempData[] = new float[4];
+                String ave_data = "";
                 for (int i = 1; i <= 7; i++) {
-                    if (mFlowUp.get(i - 1) != null) {
+                    if (upFlowList.size() >= i && upFlowList.get(i - 1).size() == 2) {
+                        ave_data = "";
+                        for (int a = 0; a < 2; a++) {
+                            tempData = upFlowList.get(i - 1).get(a);
+                            dataUpList.add(tempData[3]);
+                            if (a < 1) {
+                                ave_data += tempData[3] + "/";
+                            } else {
+                                ave_data += tempData[3];
+                            }
+                            switch (a) {
+                                case 0:
+                                    dataMap.put("$IA_1_" + i + "$", tempData[0] + "," +
+                                            "" + tempData[1] + "," + tempData[2]);
+                                    break;
+                                case 1:
+                                    dataMap.put("$IA_2_" + i + "$", tempData[0] + "," +
+                                            "" + tempData[1] + "," + tempData[2]);
+                                    break;
+                            }
+                        }
+                        dataMap.put("$IA_ave_" + i + "$", ave_data);
+                    } else {
                         dataMap.put("$IA_1_" + i + "$", "");
                         dataMap.put("$IA_2_" + i + "$", "");
                         dataMap.put("$IA_ave_" + i + "$", "");
                     }
-                }
-                Gson gson = new Gson();
-                String testData = gson.toJson(upFlowList);
-                Log.e(TAG, "onViewClicked: 测试保存的数据：" + testData);
-                Type type = new TypeToken<List<List<float[]>>>() {
-                }.getType();
-                Gson gs = new Gson();
-                List<List<float[]>> asd = gs.fromJson(testData, type);
-                for (List<float[]> a : asd) {
-                    for (int i = 0; i < a.size(); i++) {
-                        Log.e(TAG, "onViewClicked: 单个数组数据："+a.get(i)[0]+"   "+a.get(i)[1]+"   "+a
-                                .get(i)[2]+"   "+a.get(i)[3]);
+
+
+                    if (downFlowList.size() >= i && downFlowList.get(i - 1).size() == 3) {
+                        ave_data = "";
+                        for (int a = 0; a < 3; a++) {
+                            tempData = downFlowList.get(i - 1).get(a);
+                            dataDownList.add(tempData[3]);
+                            switch (a) {
+                                case 0:
+                                    dataMap.put("$DA_1_" + i + "$", tempData[0] + "," +
+                                            "" + tempData[1] + "," + tempData[2]);
+                                    ave_data += tempData[3] + "/";
+                                    break;
+                                case 1:
+                                    dataMap.put("$DA_2_" + i + "$", tempData[0] + "," +
+                                            "" + tempData[1] + "," + tempData[2]);
+                                    ave_data += tempData[3] + "/";
+                                    break;
+                                case 2:
+                                    dataMap.put("$DA_3_" + i + "$", tempData[0] + "," +
+                                            "" + tempData[1] + "," + tempData[2]);
+                                    ave_data += tempData[3];
+                                    break;
+                            }
+                        }
+                        dataMap.put("$DA_ave_" + i + "$", ave_data);
+                    } else {
+                        dataMap.put("$DA_1_" + i + "$", "");
+                        dataMap.put("$DA_2_" + i + "$", "");
+                        dataMap.put("$DA_3_" + i + "$", "");
+                        dataMap.put("$DA_ave_" + i + "$", "");
                     }
                 }
+                dataMap.put("$IA_ave_ave$", Util.getListAve(dataUpList) + "");
+                dataMap.put("$DA_ave_ave$", Util.getListAve(dataDownList) + "");
+                mUpAve.setText(Util.getListAve(dataUpList) + "");
+                mDownAve.setText(Util.getListAve(dataDownList) + "");
+
+                Gson gson = new Gson();
+                String testData = gson.toJson(dataMap);
+                Util.saveToDocData(AppConstant.FLOW_DATA, testData);
                 TastyToast.makeText(getApplicationContext(), "数据保存成功", TastyToast.LENGTH_SHORT,
                         TastyToast.INFO);
+                Log.e(TAG, "onViewClicked: 测试保存的数据：" + testData);
+//                Type type = new TypeToken<List<List<float[]>>>() {
+//                }.getType();
+//                Gson gs = new Gson();
+//                List<List<float[]>> asd = gs.fromJson(testData, type);
+//                for (List<float[]> a : asd) {
+//                    for (int i = 0; i < a.size(); i++) {
+//                        Log.e(TAG, "onViewClicked: 单个数组数据："+a.get(i)[0]+"   "+a.get(i)[1]+"   "+a
+//                                .get(i)[2]+"   "+a.get(i)[3]);
+//                    }
+//                }
                 break;
         }
     }

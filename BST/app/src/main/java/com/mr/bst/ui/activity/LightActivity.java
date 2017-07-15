@@ -48,9 +48,9 @@ public class LightActivity extends BaseChartActivity {
     @BindView(R.id.light_switch)
     Switch mLightSwitch;
     @BindView(R.id.open_light_ave)
-    EditText mOpenLightAve;
+    TextView mOpenLightAve;
     @BindView(R.id.close_light_ave)
-    EditText mCloseLightAve;
+    TextView mCloseLightAve;
     @BindView(R.id.ensure_distance)
     Button mEnsureDistance;
     @BindView(R.id.x_distance)
@@ -77,9 +77,7 @@ public class LightActivity extends BaseChartActivity {
     private float sum = 0, ave = 0;
     private boolean isLamp = true;
     private int isSixPoint = 6;
-
     private Map<String, String> dataMap;
-
     private LightDataAdapter mLightOnAdapter, mLightOffAdapter;
     private ItemTouchHelper mLightOnHelper, mLightOffHelper;
     private ItemDragAndSwipeCallback mLightOnDragCallback, mLightOffDragCallback;
@@ -200,6 +198,7 @@ public class LightActivity extends BaseChartActivity {
         mLightCloseRecyclerview.setLayoutManager(new LinearLayoutManager(this));
         mLightOpenRecyclerview.setAdapter(mLightOnAdapter);
         mLightCloseRecyclerview.setAdapter(mLightOffAdapter);
+
         //开关灯切换监听
         mLightSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -294,7 +293,7 @@ public class LightActivity extends BaseChartActivity {
                 }
             } else if (sendData.trim().endsWith("end")) {
 
-                if (!isDistance) {
+                if (!isDistance && sendData.trim().contains("Z")) {
                     mLightData = Util.getLightData(sendData);
                     for (int i = 0; i < 2; i++) {
                         sum += mLightData[i];
@@ -302,7 +301,7 @@ public class LightActivity extends BaseChartActivity {
                     ave = ((sum / 2f) * 10) / 10f;
                     mLightData[3] = ave;
                     msg.what = 1;
-                } else {
+                } else if (sendData.trim().contains("L")){
                     mDistance = Util.getDistanceData(sendData);
                     msg.what = 3;
                 }
@@ -321,8 +320,8 @@ public class LightActivity extends BaseChartActivity {
                 mAddTextPot.setVisibility(View.VISIBLE);
                 synchronized (obj) {
                     isDistance = false;
+                    sendData();
                 }
-                sendData();
                 break;
             case R.id.add_text_pot:
                 mAddTextPot.setVisibility(View.GONE);
@@ -332,23 +331,81 @@ public class LightActivity extends BaseChartActivity {
                 break;
             case R.id.save_data:
                 dataMap = new HashMap<>();
+                List<Float> ave_1 = new ArrayList<>();
+                List<Float> ave_2 = new ArrayList<>();
+                List<Float> ave_3 = new ArrayList<>();
+                List<Float> ave_ave = new ArrayList<>();
+                for (int i = 0; i < mLightOpenList.size(); i++) {
+                    for (int j = 0; j < 4; j++) {
+                        switch (j) {
+                            case 0:
+                                ave_1.add(mLightOpenList.get(i)[j]);
+                                break;
+                            case 1:
+                                ave_2.add(mLightOpenList.get(i)[j]);
+                                break;
+                            case 2:
+                                ave_3.add(mLightOpenList.get(i)[j]);
+                                break;
+                            case 3:
+                                ave_ave.add(mLightOpenList.get(i)[j]);
+                                break;
+                        }
+                    }
+                }
+                dataMap.put("$CAVE_1$", Util.getListAve(ave_1) + "");
+                dataMap.put("$CAVE_2$", Util.getListAve(ave_2) + "");
+                dataMap.put("$CAVE_3$", Util.getListAve(ave_3) + "");
+                dataMap.put("$CAVE_ave$", Util.getListAve(ave_ave) + "");
+                mCloseLightAve.setText(Util.getListAve(ave_ave) + "");
+
+                ave_1.clear();
+                ave_2.clear();
+                ave_3.clear();
+                ave_ave.clear();
+
+                for (int i = 0; i < mLightCloseList.size(); i++) {
+                    for (int j = 0; j < 4; j++) {
+                        switch (j) {
+                            case 0:
+                                ave_1.add(mLightCloseList.get(i)[j]);
+                                break;
+                            case 1:
+                                ave_2.add(mLightCloseList.get(i)[j]);
+                                break;
+                            case 2:
+                                ave_3.add(mLightCloseList.get(i)[j]);
+                                break;
+                            case 3:
+                                ave_ave.add(mLightCloseList.get(i)[j]);
+                                break;
+                        }
+                    }
+                }
+
+                dataMap.put("$OAVE_1$", Util.getListAve(ave_1) + "");
+                dataMap.put("$OAVE_2$", Util.getListAve(ave_2) + "");
+                dataMap.put("$OAVE_3$", Util.getListAve(ave_3) + "");
+                dataMap.put("$OAVE_ave$", Util.getListAve(ave_ave) + "");
+                mOpenLightAve.setText(Util.getListAve(ave_ave)+"");
+
                 for (int i = 1; i <= 6; i++) {
-                    if (mLightOpenList.get(i-1) != null) {
-                        dataMap.put("$O_" + i + "_1$", mLightOpenList.get(i)[0] + "");
-                        dataMap.put("$O_" + i + "_2$", mLightOpenList.get(i)[1] + "");
-                        dataMap.put("$O_" + i + "_3$", mLightOpenList.get(i)[2] + "");
-                        dataMap.put("$O_" + i + "_ave$", mLightOpenList.get(i)[3] + "");
+                    if (mLightOpenList.size() >= i && mLightOpenList.get(i - 1) != null) {
+                        dataMap.put("$O_" + i + "_1$", mLightOpenList.get(i - 1)[0] + "");
+                        dataMap.put("$O_" + i + "_2$", mLightOpenList.get(i - 1)[1] + "");
+                        dataMap.put("$O_" + i + "_3$", mLightOpenList.get(i - 1)[2] + "");
+                        dataMap.put("$O_" + i + "_ave$", mLightOpenList.get(i - 1)[3] + "");
                     } else {
                         dataMap.put("$O_" + i + "_1$", "");
                         dataMap.put("$O_" + i + "_2$", "");
                         dataMap.put("$O_" + i + "_3$", "");
                         dataMap.put("$O_" + i + "_ave$", "");
                     }
-                    if (mLightCloseList.get(i-1) != null) {
-                        dataMap.put("$C_" + i + "_1$", mLightCloseList.get(i)[0] + "");
-                        dataMap.put("$C_" + i + "_2$", mLightCloseList.get(i)[1] + "");
-                        dataMap.put("$C_" + i + "_3$", mLightCloseList.get(i)[2] + "");
-                        dataMap.put("$C_" + i + "_ave$", mLightCloseList.get(i)[3] + "");
+                    if (mLightCloseList.size() >= i && mLightCloseList.get(i - 1) != null) {
+                        dataMap.put("$C_" + i + "_1$", mLightCloseList.get(i - 1)[0] + "");
+                        dataMap.put("$C_" + i + "_2$", mLightCloseList.get(i - 1)[1] + "");
+                        dataMap.put("$C_" + i + "_3$", mLightCloseList.get(i - 1)[2] + "");
+                        dataMap.put("$C_" + i + "_ave$", mLightCloseList.get(i - 1)[3] + "");
                     } else {
                         dataMap.put("$C_" + i + "_1$", "");
                         dataMap.put("$C_" + i + "_2$", "");
@@ -357,7 +414,7 @@ public class LightActivity extends BaseChartActivity {
                     }
                 }
                 Gson gson = new Gson();
-                Util.saveToDocData(AppConstant.LIGHT_DATA,gson.toJson(dataMap));
+                Util.saveToDocData(AppConstant.LIGHT_DATA, gson.toJson(dataMap));
                 TastyToast.makeText(getApplicationContext(), "数据保存成功", TastyToast.LENGTH_SHORT,
                         TastyToast.INFO);
                 break;

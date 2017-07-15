@@ -1,7 +1,6 @@
-package com.zda.daggertest;
+package com.zda.daggertest.User;
 
 import android.content.Context;
-import android.util.Log;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,10 +17,10 @@ public class UserModule {
         this.mContext = context;
     }
 
-//    @Provides
-//    public User provideUserModule() {
-//        return new User();
-//    }
+    @Provides
+    public User provideUserModule() {
+        return new User();
+    }
 
     @Provides
     public String provideUrl() {

@@ -1,4 +1,4 @@
-package com.zda.daggertest;
+package com.zda.daggertest.User;
 
 import android.content.Context;
 import android.util.Log;

@@ -21,6 +21,9 @@ import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -149,7 +152,7 @@ public class Util {
     }
 
     /**
-     * 获取三个数据数据平均值
+     * 获取数组平均值，并把结果放到最后一个位置上
      *
      * @param data
      * @return
@@ -160,6 +163,19 @@ public class Util {
             sum += data[i];
         }
         return Math.round((sum / (data.length - 1)) * 1000) / 1000f;
+    }
+
+    /**
+     * 获取一个存储float数据的集合的平均值
+     * @param data
+     * @return
+     */
+    public static float getListAve(List<Float> data) {
+        float sum = 0;
+        for (int i = 0; i < data.size(); i++) {
+            sum += data.get(i);
+        }
+        return Math.round((sum / (data.size())) * 1000) / 1000f;
     }
 
     /**
@@ -257,6 +273,29 @@ public class Util {
     }
 
     /**
+     * 根据键值获取相应的数据
+     *
+     * @param key 键值
+     * @return 返回本地保存的数据，若无返回null
+     */
+    public static String getSavedDocData(String key) {
+        SharedPreferences sharedPreferences = BSTApp.getAppContext().getSharedPreferences
+                (AppConstant.DOC_DATA, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(key, null);
+    }
+
+    /**
+     * 清理测试完后保存的数据
+     */
+    public static void clearDocData() {
+        SharedPreferences sharedPreferences = BSTApp.getAppContext().getSharedPreferences
+                (AppConstant.DOC_DATA, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    /**
      * 获取保存的ssid
      *
      * @return
@@ -334,7 +373,18 @@ public class Util {
     public static String getNowTime() {
         Time time = new Time();
         time.setToNow();
-        return "" + time.year + time.month + time.monthDay + time.hour + time.minute + time.second;
+        return "" + time.year +  (time.month + 1) + time.monthDay + time.hour + time.minute + time.second;
+    }
+
+    /**
+     * 获取当前日期
+     *
+     * @return
+     */
+    public static String getData() {
+        Time time = new Time();
+        time.setToNow();
+        return time.year + "-" + (time.month + 1) + "-" + time.monthDay;
     }
 
     /**
@@ -483,5 +533,71 @@ public class Util {
             return false;
         }
         return true;
+    }
+
+    public static Map<String, String> getEmptyLightData() {
+        Map<String, String> map = new HashMap<>();
+        for (int i = 1; i <= 6; i++) {
+            map.put("$O_" + i + "_1$", "");
+            map.put("$O_" + i + "_2$", "");
+            map.put("$O_" + i + "_3$", "");
+            map.put("$O_" + i + "_ave$", "");
+
+            map.put("$C_" + i + "_1$", "");
+            map.put("$C_" + i + "_2$", "");
+            map.put("$C_" + i + "_3$", "");
+            map.put("$C_" + i + "_ave$", "");
+        }
+        map.put("$CAVE_1$", "");
+        map.put("$CAVE_2$", "");
+        map.put("$CAVE_3$", "");
+        map.put("$CAVE_ave$", "");
+        map.put("$OAVE_1$", "");
+        map.put("$OAVE_2$", "");
+        map.put("$OAVE_3$", "");
+        map.put("$OAVE_ave$", "");
+        return map;
+    }
+
+    public static Map<String, String> getEmptyFlowData() {
+        Map<String, String> map = new HashMap<>();
+        for (int i = 1; i <= 7; i++) {
+            map.put("$IA_1_" + i + "$", "");
+            map.put("$IA_2_" + i + "$", "");
+            map.put("$IA_3_" + i + "$", "");
+            map.put("$IA_ave_" + i + "$", "");
+
+            map.put("$DA_1_" + i + "$", "");
+            map.put("$DA_2_" + i + "$", "");
+            map.put("$DA_3_" + i + "$", "");
+            map.put("$DA_ave_" + i + "$", "");
+        }
+        map.put("$IA_ave_ave$", "");
+        map.put("$DA_ave_ave$", "");
+        return map;
+    }
+
+    public static Map<String, String> getEmptyTPData() {
+        Map<String, String> map = new HashMap<>();
+        map.put("$PA_1$", "");
+        map.put("$PA_2$", "");
+        map.put("$PA_3$", "");
+        map.put("$PA_ave$", "");
+        map.put("$OBT$", "");
+        map.put("$OAT$", "");
+        map.put("$T_ave$", "");
+        return map;
+    }
+
+    /**
+     * 获取空振动数据，填入表格
+     * @return
+     */
+    public static Map<String, String> getEmptySKData() {
+        Map<String, String> map = new HashMap<>();
+        map.put("$OBS$", "");
+        map.put("$OAS$", "");
+        map.put("$S_ave$", "");
+        return map;
     }
 }

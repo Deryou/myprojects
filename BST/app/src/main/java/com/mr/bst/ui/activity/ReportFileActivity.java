@@ -106,7 +106,7 @@ public class ReportFileActivity extends BaseActivity{
     private void updateList() {
 //        File file = this.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
         mFilelist.clear();
-        File file = new File(Util.getSDPaht(this)+ AppConstant.REPORT_FOLDER);
+        File file = new File(Util.getSDPath(this)+ AppConstant.REPORT_FOLDER);
         files = file.listFiles();
         if (files != null) {
             for (int i = 0; i < files.length; i++) {

@@ -101,10 +101,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="下降均值"/>
+                        android:text="下降均值:"/>
 
-                    <EditText
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/down_ave"
+                        android:layout_width="@dimen/dp_50"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
@@ -117,10 +118,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="流入均值"/>
+                        android:text="流入均值:"/>
 
-                    <EditText
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/up_ave"
+                        android:layout_width="@dimen/dp_50"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
@@ -194,7 +196,50 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_20"
+                        android:layout_gravity="center_horizontal"
                         android:text="下降气流："/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/black"
+                        android:layout_marginTop="@dimen/dp_5" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/item_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="invisible"
+                            android:text="第0行:"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:text="第一排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="第二排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="第三排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="平均值"/>
+                    </LinearLayout>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/flow_in_recyclerview"
@@ -206,7 +251,49 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="@dimen/sp_20"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:layout_gravity="center_horizontal"
                         android:text="流入气流："/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/black"
+                        android:layout_marginTop="@dimen/dp_5" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="invisible"
+                            android:text="第0行:"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:text="第一排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="第二排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="第三排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="平均值"/>
+                    </LinearLayout>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/flow_out_recyclerview"
@@ -220,6 +307,7 @@
                 android:id="@+id/save_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
                 android:text="保存测量数据"/>
         </LinearLayout>
     </com.mr.bst.widget.DampingScrollView>

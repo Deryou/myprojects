@@ -1,4 +1,6 @@
-package com.zda.daggertest;
+package com.zda.daggertest.User;
+
+import com.zda.daggertest.MainActivity;
 
 import dagger.Component;
 
@@ -8,5 +10,5 @@ import dagger.Component;
 
 @Component(modules = {UserModule.class})
 public interface UserComponent {
-    void inject(MainActivity activity);
+//    void inject(MainActivity activity);
 }

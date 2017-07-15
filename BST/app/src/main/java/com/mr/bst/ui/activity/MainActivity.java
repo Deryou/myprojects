@@ -31,8 +31,8 @@ public class MainActivity extends BaseActivity implements ServerConnCallback{
 
     @BindView(R.id.equip_setting)
     Button mEquipSetting;
-    @BindView(R.id.equip_correct)
-    Button mEquipCorrect;
+//    @BindView(R.id.equip_correct)
+//    Button mEquipCorrect;
     @BindView(R.id.temp_press_test)
     Button mTempPressTest;
     @BindView(R.id.shake_test)
@@ -95,10 +95,10 @@ public class MainActivity extends BaseActivity implements ServerConnCallback{
 
     @Override
     public String setToolbarTitle() {
-        return "多参数终端";
+        return getString(R.string.app_name);
     }
 
-    @OnClick({R.id.equip_setting, R.id.equip_correct, R.id.temp_press_test,R.id.shake_test, R.id
+    @OnClick({R.id.equip_setting, R.id.temp_press_test,R.id.shake_test, R.id
             .light_test, R.id
             .flow_test})
     public void onViewClicked(View view) {
@@ -106,9 +106,9 @@ public class MainActivity extends BaseActivity implements ServerConnCallback{
             case R.id.equip_setting:
                 EquipSetActivity.startActivity(this);
                 break;
-            case R.id.equip_correct:
-                EquipCalibrateActivity.startActivity(this);
-                break;
+//            case R.id.equip_correct:
+//                EquipCalibrateActivity.startActivity(this);
+//                break;
             case R.id.temp_press_test:
                 TPActivity.startActivity(this);
                 break;
@@ -137,6 +137,7 @@ public class MainActivity extends BaseActivity implements ServerConnCallback{
                 ReportFileActivity.startActivity(this);
                 break;
             case R.id.save_file:
+                SaveDocActivity.startActivity(this);
                 break;
             case R.id.hotspot_set:
                 if (!isEmptyString(getHotspotName())) {
@@ -222,6 +223,7 @@ public class MainActivity extends BaseActivity implements ServerConnCallback{
     @Override
     protected void onDestroy() {
         mTcpServer.disconnect();
+        Util.clearDocData();
         super.onDestroy();
     }
 

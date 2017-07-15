@@ -85,9 +85,9 @@
                         android:layout_height="wrap_content"
                         android:text="开灯均值"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/open_light_ave"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/dp_50"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
@@ -102,9 +102,9 @@
                         android:layout_height="wrap_content"
                         android:text="关灯均值"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/close_light_ave"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/dp_50"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
@@ -179,7 +179,49 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:textSize="@dimen/sp_20"
                         android:text="开灯数据："/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/black"
+                        android:layout_marginTop="@dimen/dp_5" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="invisible"
+                            android:text="第0行:"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:text="第一排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="第二排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="第三排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="平均值"/>
+                    </LinearLayout>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/light_open_recyclerview"
@@ -191,7 +233,49 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_20"
+                        android:textSize="@dimen/sp_20"
                         android:text="关灯数据："/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/black"
+                        android:layout_marginTop="@dimen/dp_5" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="invisible"
+                            android:text="第0行:"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="@dimen/dp_10"
+                            android:text="第一排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="第二排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="第三排"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="平均值"/>
+                    </LinearLayout>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/light_close_recyclerview"

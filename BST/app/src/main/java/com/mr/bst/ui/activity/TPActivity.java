@@ -183,25 +183,25 @@ public class TPActivity extends BaseActivity implements ServerCallback {
         return "温压测试";
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.tp_menu, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.tp_menu, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.data_refresh:
-                sendReqData();
-                break;
-            case R.id.data_clear:
-                if (mFragment instanceof TpTempFragment) {
-                    ((TpTempFragment) mFragment).clearData();
-                } else if (mFragment instanceof TpPressureFragment) {
-                    ((TpPressureFragment) mFragment).clearData();
-                }
-                break;
+//            case R.id.data_refresh:
+//                sendReqData();
+//                break;
+//            case R.id.data_clear:
+//                if (mFragment instanceof TpTempFragment) {
+//                    ((TpTempFragment) mFragment).clearData();
+//                } else if (mFragment instanceof TpPressureFragment) {
+//                    ((TpPressureFragment) mFragment).clearData();
+//                }
+//                break;
         }
         return super.onOptionsItemSelected(item);
     }
