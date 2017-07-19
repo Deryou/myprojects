@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/send_setting"
+        android:title="配置设备"
+        android:icon="@mipmap/icon_send_setting"
+        app:showAsAction="always"
+        />
+</menu>

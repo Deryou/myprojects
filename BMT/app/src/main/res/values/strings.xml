@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">BMT</string>
+
+    <!--主页按钮-->
+    <string name="equip_setting">设备配置</string>
+    <string name="equipment">设备数据</string>
+
+    <!--设备连接-->
+    <string name="equip_conn_successed">设备已连接</string>
+    <string name="equip_conn_error">设备连接失败</string>
+    <string name="equip_setting_successed">设备配置成功</string>
+
+    <string name="dialog_title_set_queipnum">设置设备编号并配置</string>
+    <string name="dialog_display_set_queipnum">请输入设备号：</string>
+
+    <string name="dialog_enter_pwd_title">WIFI连接</string>
+    <string name="dialog_enter_pwd_display">请输入密码：</string>
+
+    <string name="write_to_equip_success">写入设备成功</string>
+    <string name="write_to_equip_failed">写入配置失败</string>
+
+    <string name="tip_pwd_empty">密码不能为空</string>
+
+    <string name="confirm">确认</string>
+    <string name="cancel">取消</string>
+    <string name="warn_enter_number">请输入设备号后再确认</string>
+
+    <string name="wifi_connected">Wifi已连接</string>
+    <string name="wifi_connected_success">Wifi连接成功</string>
+    <string name="wifi_connected_error">Wifi连接失败</string>
+
+    <string name="hotspot_dialog_title">更改热点名称和密码</string>
+    <string name="hotspot_tip_notnull">用户名或密码不能为空</string>
+    <string name="hotspot_tip_okandopen">热点修改成功并且成功开启</string>
+    <string name="hotspot_modifier_fail">修改失败</string>
+    <string name="hotspot_open_success">热点开启成功</string>
+    <string name="hotspot_open_fail">热点开启失败</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
