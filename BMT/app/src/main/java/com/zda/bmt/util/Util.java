@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
 public class Util {
     private static final String TAG = "Util";
     public static float dataInfo[];
-    public static float dataOne;
+    public static float dataOne = 0;
 
     /**
      * 获取发送给BMT的配置信息
@@ -50,6 +50,10 @@ public class Util {
         data[1] = "SS" + getHotspotPwd() + "end";
         data[2] = "SI" + AppConstant.HOTSPOT_IP + "end";
         data[3] = "SP" + AppConstant.HOTSPOT_PORT + "end";
+//        data[0] = "SN" + "NJMR" + "end";
+//        data[1] = "SS" + "mfsygc6610" + "end";
+//        data[2] = "SI" + "192.168.0.200" + "end";
+//        data[3] = "SP" + "8282" + "end";
         for (int i = 0; i < data.length; i++) {
             if (machineNum >= 0 && machineNum < 10) {
                 data[i] = "ST0" + machineNum + data[i];
@@ -61,6 +65,28 @@ public class Util {
         return data;
     }
 
+    /**
+     * 获取温度数据
+     *
+     * @param data
+     * @return
+     */
+    public static float getTempData(String data) {
+        //OnDataReceived: CD022endST02Ta10685.00DL094end
+        dataOne = Float.parseFloat(data.substring(data.lastIndexOf("T") + 2, data.indexOf("DL")));
+        Log.e(TAG, "getTempData: " + "-------->>>>>>>>" + dataOne);
+        return dataOne;
+    }
+
+    public static float getHumdityData(String data) {
+        dataOne = Float.parseFloat(data.substring(data.indexOf("H") + 2, data.indexOf("DL")));
+        return dataOne;
+    }
+
+    public static float getOxygenData(String data) {
+        dataOne = Float.parseFloat(data.substring(data.indexOf("O") + 2, data.indexOf("DL")));
+        return dataOne;
+    }
 
     /**
      * 获取数组平均值，并把结果放到最后一个位置上
@@ -78,6 +104,7 @@ public class Util {
 
     /**
      * 获取一个存储float数据的集合的平均值
+     *
      * @param data
      * @return
      */
@@ -235,7 +262,8 @@ public class Util {
     public static String getNowTime() {
         Time time = new Time();
         time.setToNow();
-        return "" + time.year +  (time.month + 1) + time.monthDay + time.hour + time.minute + time.second;
+        return "" + time.year + (time.month + 1) + time.monthDay + time.hour + time.minute + time
+                .second;
     }
 
     /**
@@ -397,69 +425,98 @@ public class Util {
         return true;
     }
 
-    public static Map<String, String> getEmptyLightData() {
+    public static Map<String, String> getEmptyType_32() {
         Map<String, String> map = new HashMap<>();
-        for (int i = 1; i <= 6; i++) {
-            map.put("$O_" + i + "_1$", "");
-            map.put("$O_" + i + "_2$", "");
-            map.put("$O_" + i + "_3$", "");
-            map.put("$O_" + i + "_ave$", "");
-
-            map.put("$C_" + i + "_1$", "");
-            map.put("$C_" + i + "_2$", "");
-            map.put("$C_" + i + "_3$", "");
-            map.put("$C_" + i + "_ave$", "");
+        for (int i = 1; i <= 15; i++) {
+            if (i < 10) {
+                map.put("$ST32_0" + i + "$", "");
+                map.put("$TA32_0" + i + "$", "");
+                map.put("$TB32_0" + i + "$", "");
+                map.put("$TC32_0" + i + "$", "");
+                map.put("$TD32_0" + i + "$", "");
+                map.put("$TE32_0" + i + "$", "");
+            } else {
+                map.put("$ST32_" + i + "$", "");
+                map.put("$TA32_" + i + "$", "");
+                map.put("$TB32_" + i + "$", "");
+                map.put("$TC32_" + i + "$", "");
+                map.put("$TD32_" + i + "$", "");
+                map.put("$TE32_" + i + "$", "");
+            }
         }
-        map.put("$CAVE_1$", "");
-        map.put("$CAVE_2$", "");
-        map.put("$CAVE_3$", "");
-        map.put("$CAVE_ave$", "");
-        map.put("$OAVE_1$", "");
-        map.put("$OAVE_2$", "");
-        map.put("$OAVE_3$", "");
-        map.put("$OAVE_ave$", "");
+        map.put("$ST32_AVE$", "");
+        map.put("$TA32_AVE$", "");
+        map.put("$TB32_AVE$", "");
+        map.put("$TC32_AVE$", "");
+        map.put("$TD32_AVE$", "");
+        map.put("$TE32_AVE$", "");
         return map;
     }
 
-    public static Map<String, String> getEmptyFlowData() {
+    public static Map<String, String> getEmptyType_36() {
         Map<String, String> map = new HashMap<>();
-        for (int i = 1; i <= 7; i++) {
-            map.put("$IA_1_" + i + "$", "");
-            map.put("$IA_2_" + i + "$", "");
-            map.put("$IA_3_" + i + "$", "");
-            map.put("$IA_ave_" + i + "$", "");
-
-            map.put("$DA_1_" + i + "$", "");
-            map.put("$DA_2_" + i + "$", "");
-            map.put("$DA_3_" + i + "$", "");
-            map.put("$DA_ave_" + i + "$", "");
+        for (int i = 1; i <= 15; i++) {
+            if (i < 10) {
+                map.put("$ST36_0" + i + "$", "");
+                map.put("$TA36_0" + i + "$", "");
+                map.put("$TB36_0" + i + "$", "");
+                map.put("$TC36_0" + i + "$", "");
+                map.put("$TD36_0" + i + "$", "");
+                map.put("$TE36_0" + i + "$", "");
+            } else {
+                map.put("$ST36_" + i + "$", "");
+                map.put("$TA36_" + i + "$", "");
+                map.put("$TB36_" + i + "$", "");
+                map.put("$TC36_" + i + "$", "");
+                map.put("$TD36_" + i + "$", "");
+                map.put("$TE36_" + i + "$", "");
+            }
         }
-        map.put("$IA_ave_ave$", "");
-        map.put("$DA_ave_ave$", "");
+        map.put("$ST36_AVE$", "");
+        map.put("$TA36_AVE$", "");
+        map.put("$TB36_AVE$", "");
+        map.put("$TC36_AVE$", "");
+        map.put("$TD36_AVE$", "");
+        map.put("$TE36_AVE$", "");
         return map;
     }
 
-    public static Map<String, String> getEmptyTPData() {
+    public static Map<String, String> getEmptyHumidity() {
         Map<String, String> map = new HashMap<>();
-        map.put("$PA_1$", "");
-        map.put("$PA_2$", "");
-        map.put("$PA_3$", "");
-        map.put("$PA_ave$", "");
-        map.put("$OBT$", "");
-        map.put("$OAT$", "");
-        map.put("$T_ave$", "");
+        for (int i = 1; i <= 3; i++) {
+            map.put("$SH0" + i + "$", "");
+            map.put("$TH0" + i + "$", "");
+        }
+        map.put("$SH_AVE", "");
+        map.put("$TH_AVE", "");
+        map.put("$HUM_ERR$", "");
         return map;
     }
 
-    /**
-     * 获取空振动数据，填入表格
-     * @return
-     */
-    public static Map<String, String> getEmptySKData() {
+    public static Map<String, String> getEmptyOxygen() {
         Map<String, String> map = new HashMap<>();
-        map.put("$OBS$", "");
-        map.put("$OAS$", "");
-        map.put("$S_ave$", "");
+        for (int i = 1; i <= 3; i++) {
+            map.put("$SO0" + i + "$", "");
+            map.put("$TO0" + i + "$", "");
+        }
+        map.put("$SO_AVE", "");
+        map.put("$TO_AVE", "");
+        map.put("$OXY_ERR$", "");
+        return map;
+    }
+
+    public static Map<String, String> getTempData(String dataType,String tempType, List<Float>
+            data) {
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i < 15; i++) {
+            if (i < 9) {
+                map.put("$T" + dataType + tempType + "0" + (i + 1) + "$", String.valueOf(data.get
+                        (i)==null?"":data.get(i)));
+            } else {
+                map.put("$T" + dataType + tempType + (i+1) + "$", String.valueOf(data.get
+                        (i)==null?"":data.get(i)));
+            }
+        }
         return map;
     }
 }

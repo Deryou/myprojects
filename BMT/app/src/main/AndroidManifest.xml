@@ -32,11 +32,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.actiivty.BaseActivity">
+        <activity android:name=".ui.actiivty.ReportFileActivity">
         </activity>
         <activity android:name=".ui.actiivty.EquipSetActivity">
         </activity>
-        <activity android:name=".ui.actiivty.EquipmentActivity">
+        <activity android:name=".ui.actiivty.EquipmentActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden">
         </activity>
     </application>
 

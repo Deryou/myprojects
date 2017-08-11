@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class MEditDialog extends Dialog{
     private Button ensure,cancel;
     private TextView title,titleRow1,titleRow2;
     private String titleMsg,titleRow1Msg,titleRow2Msg;
+    private EditText mETRow1,mETRow2;
     //用于自定义确认与取消按钮
     private String ensureStr,cancelStr;
     private TableRow mTableRow1,mTableRow2;
@@ -100,7 +102,8 @@ public class MEditDialog extends Dialog{
         titleRow2 = (TextView) findViewById(R.id.title_row2);
         mTableRow1 = (TableRow) findViewById(R.id.table_row1);
         mTableRow2 = (TableRow) findViewById(R.id.table_row2);
-
+        mETRow1 = (EditText) findViewById(R.id.ed_row1);
+        mETRow2 = (EditText) findViewById(R.id.ed_row2);
     }
 
     public MEditDialog setTitle(String title) {
@@ -124,6 +127,13 @@ public class MEditDialog extends Dialog{
 
     public String getTitleRow2Msg() {
         return titleRow2.getText().toString();
+    }
+
+    public String getETRow1() {
+        return mETRow1.getText() == null ? null : mETRow1.getText().toString();
+    }
+    public String getETRow2() {
+        return mETRow2.getText() == null ? null : mETRow2.getText().toString();
     }
 
     /**

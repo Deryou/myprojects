@@ -82,21 +82,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/before_temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/start_before_temp"/>
-
-                <Button
-                    android:id="@+id/recode_data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/write_data"
-                    android:visibility="gone"/>
             </LinearLayout>
 
             <TableLayout
@@ -109,14 +94,6 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="压差"
-                        android:textSize="18sp">
-                    </TextView>
-
                     <EditText
                         android:id="@+id/diff_press"
                         android:layout_width="200dp"
@@ -125,20 +102,21 @@
                         android:text="0"
                         android:textSize="18sp">
                     </EditText>
+
+                    <Button
+                        android:id="@+id/get_diff_press"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="压差"
+                        android:textSize="18sp">
+                    </Button>
                 </TableRow>
 
                 <TableRow
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="柜内负压平均值"
-                        android:textSize="18sp">
-                    </TextView>
 
                     <EditText
                         android:id="@+id/press_ave"
@@ -149,20 +127,21 @@
                         android:text="0"
                         android:textSize="18sp">
                     </EditText>
+
+                    <TextView
+                        android:id="@+id/get_press_ave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="柜内负压平均值"
+                        android:textSize="18sp">
+                    </TextView>
                 </TableRow>
 
                 <TableRow
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="开机前温度"
-                        android:textSize="18sp">
-                    </TextView>
 
                     <EditText
                         android:id="@+id/start_temp"
@@ -173,20 +152,21 @@
                         android:text="0"
                         android:textSize="18sp">
                     </EditText>
+
+                    <Button
+                        android:id="@+id/get_start_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="开机前温度"
+                        android:textSize="18sp">
+                    </Button>
                 </TableRow>
 
                 <TableRow
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="开机后温度"
-                        android:textSize="18sp">
-                    </TextView>
 
                     <EditText
                         android:id="@+id/after_temp"
@@ -197,20 +177,20 @@
                         android:text="0"
                         android:textSize="18sp">
                     </EditText>
+                    <Button
+                        android:id="@+id/get_after_temp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="开机后温度"
+                        android:textSize="18sp">
+                    </Button>
                 </TableRow>
 
                 <TableRow
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center_horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:text="温升"
-                        android:textSize="18sp">
-                    </TextView>
 
                     <EditText
                         android:id="@+id/raised_temp"
@@ -221,13 +201,23 @@
                         android:text="0"
                         android:textSize="18sp">
                     </EditText>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="温升"
+                        android:textSize="18sp">
+                    </TextView>
                 </TableRow>
             </TableLayout>
-            <Button
+            <com.dd.CircularProgressButton
                 android:id="@+id/save_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="确认当前数据"/>
+                android:layout_margin="@dimen/dp_20"
+                app:cpb_textComplete="已保存"
+                app:cpb_textIdle="保存当前数据"/>
         </LinearLayout>
     </com.mr.bst.widget.DampingScrollView>
 </LinearLayout>

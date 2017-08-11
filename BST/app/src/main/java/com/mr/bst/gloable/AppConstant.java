@@ -34,7 +34,7 @@ public class AppConstant {
     public static final int TP_TEMP = 1;
 
     //报告文档保存路径
-    public static final String REPORT_FOLDER = "/reportDIR/";
+    public static final String REPORT_FOLDER = "/reportDIR";
 
     //保存到文档里的数据
     public static final String TP_DATA = "tp_data";

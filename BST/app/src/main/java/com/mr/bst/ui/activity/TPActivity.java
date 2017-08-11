@@ -1,5 +1,6 @@
 package com.mr.bst.ui.activity;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,13 +9,13 @@ import android.os.Message;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.dd.CircularProgressButton;
 import com.google.gson.Gson;
 import com.mr.bst.R;
 import com.mr.bst.adapter.ViewPagerAdapter;
@@ -49,10 +50,6 @@ public class TPActivity extends BaseActivity implements ServerCallback {
     @BindView(R.id.now_pressure)
     EditText mNowPressure;
     Message msg;
-    @BindView(R.id.recode_data)
-    Button mRecodeData;
-    @BindView(R.id.before_temp)
-    Button mBeforeTemp;
     @BindView(R.id.diff_press)
     EditText mDiffPress;
     @BindView(R.id.press_ave)
@@ -63,9 +60,17 @@ public class TPActivity extends BaseActivity implements ServerCallback {
     EditText mAfterTemp;
     @BindView(R.id.raised_temp)
     EditText mRaisedTemp;
+    @BindView(R.id.save_btn)
+    CircularProgressButton mCircularProgressButton;
     float nowTemp = 0;
     float press_ave = 0;
     float temp_raised = 0;
+    @BindView(R.id.get_diff_press)
+    Button mGetDiffPress;
+    @BindView(R.id.get_start_temp)
+    Button mGetStartTemp;
+    @BindView(R.id.get_after_temp)
+    Button mGetAfterTemp;
     private List<Fragment> mFragments;
     private Fragment mFragment;
     private TempCallback mTempCallback;
@@ -75,15 +80,13 @@ public class TPActivity extends BaseActivity implements ServerCallback {
     private Thread writeThread;
     //接收到的数据
     private float[] obtainData = new float[3];
-    private float dataOne;
-    private float[] dataPress = new float[3];
-    private boolean isRecode = false;
+    private List<Float> dataPress = new ArrayList<>();
+    private float pressDataPara = 0;
     private int count = 0;
-    private float sum = 0;
     private String pressData = "";
     private float mBootBData = 0;
 
-    private HashMap<String,String> dataMap;
+    private HashMap<String, String> dataMap;
 
     private Handler mHandler = new Handler() {
         @Override
@@ -98,19 +101,7 @@ public class TPActivity extends BaseActivity implements ServerCallback {
                         mTempCallback.setData(obtainData);
                         mPressCallback.setData(obtainData);
                     }
-                    if (isRecode && count < 3) {
-                        dataPress[count] = obtainData[AppConstant.TP_PRESSURE];
-                        sum += dataPress[count];
-                        if (count == 2) {
-                            pressData = pressData + dataPress[count];
-                            mDiffPress.setText(pressData);
-                            press_ave = Math.round((sum / 3f) * 100) / 100f;
-                            mPressAve.setText(press_ave + "");
-                        } else {
-                            pressData = pressData + dataPress[count] + ", ";
-                        }
-                        count++;
-                    }
+                    pressDataPara = obtainData[AppConstant.TP_PRESSURE];
                     break;
             }
             if (obtainData != null) {
@@ -243,43 +234,60 @@ public class TPActivity extends BaseActivity implements ServerCallback {
         mHandler.sendMessage(msg);
     }
 
-    @OnClick({R.id.before_temp, R.id.recode_data, R.id.save_btn})
+    @OnClick({R.id.save_btn, R.id.get_diff_press, R.id.get_start_temp, R.id.get_after_temp})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.before_temp:
-//                mBundle.putFloat("start_temp",obtainData[AppConstant.TP_TEMP]);
+            case R.id.save_btn:
+                if (mCircularProgressButton.getProgress() == 0) {
+                    dataMap = new HashMap<>();
+                    dataMap.put("$PA_1$", dataPress.get(0) + "");
+                    dataMap.put("$PA_2$", dataPress.get(1) + "");
+                    dataMap.put("$PA_3$", dataPress.get(2) + "");
+                    dataMap.put("$PA_ave$", press_ave + "");
+                    dataMap.put("$OBT$", mBootBData + "");
+                    dataMap.put("$OAT$", nowTemp + "");
+                    dataMap.put("$T_ave$", temp_raised + "");
+                    Gson gson = new Gson();
+                    String tp_data = gson.toJson(dataMap);
+                    Util.saveToDocData(AppConstant.TP_DATA, tp_data);
+                    simulateSuccessProgress(mCircularProgressButton);
+                } else {
+                    TastyToast.makeText(getApplicationContext(), "数据已保存，再次点击可重新保存！", TastyToast
+                                    .LENGTH_SHORT,
+                            TastyToast.INFO);
+                    mCircularProgressButton.setProgress(0);
+                }
+                break;
+            case R.id.get_diff_press:
+                if (dataPress.size() == 3) {
+                    dataPress.clear();
+                    count = 0;
+                    pressData = "";
+                }
+                count++;
+                if (count % 3 == 0) {
+                    dataPress.add(pressDataPara);
+                    pressData = pressData + pressDataPara;
+                } else {
+                    pressData = pressData + pressDataPara + ",";
+                    dataPress.add(pressDataPara);
+                    mDiffPress.setText(pressData);
+                }
+                press_ave = Util.getListAve(dataPress);
+                mPressAve.setText(press_ave + "");
+                mDiffPress.setText(pressData);
+                break;
+            case R.id.get_start_temp:
                 mBootBData = obtainData[AppConstant.TP_TEMP];
                 mStartTemp.setText(mBootBData + "");
-                mBeforeTemp.setVisibility(View.GONE);
-                mRecodeData.setVisibility(View.VISIBLE);
+                temp_raised = Math.round((nowTemp - mBootBData) * 10) / 10f;
+                mRaisedTemp.setText(temp_raised + "");
                 break;
-            case R.id.recode_data:
-//                mBundle.putFloat("after_temp",obtainData[AppConstant.TP_TEMP]);
-                count = 0;
-                pressData = "";
-                sum = 0;
-                temp_raised = 0;
-                press_ave = 0;
-                isRecode = true;
+            case R.id.get_after_temp:
                 nowTemp = obtainData[AppConstant.TP_TEMP];
                 mAfterTemp.setText(nowTemp + "");
                 temp_raised = Math.round((nowTemp - mBootBData) * 10) / 10f;
                 mRaisedTemp.setText(temp_raised + "");
-                break;
-            case R.id.save_btn:
-                dataMap = new HashMap<>();
-                dataMap.put("$PA_1$", dataPress[0]+"");
-                dataMap.put("$PA_2$", dataPress[1]+"");
-                dataMap.put("$PA_3$", dataPress[2]+"");
-                dataMap.put("$PA_ave$", press_ave+"");
-                dataMap.put("$OBT$", mBootBData + "");
-                dataMap.put("$OAT$", nowTemp + "");
-                dataMap.put("$T_ave$", temp_raised + "");
-                Gson gson = new Gson();
-                String tp_data = gson.toJson(dataMap);
-                Util.saveToDocData(AppConstant.TP_DATA,tp_data);
-                TastyToast.makeText(getApplicationContext(), "数据保存成功", TastyToast.LENGTH_SHORT,
-                        TastyToast.INFO);
                 break;
         }
     }

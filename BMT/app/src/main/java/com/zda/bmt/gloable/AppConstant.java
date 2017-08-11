@@ -23,12 +23,16 @@ public class AppConstant {
     public static final String HOTSPOT_PWD = "HOTSPOT_PWD";
     public static final String EQUIPMENT_NUMBER = "EQUIPMENT_NUMBER";
 
+    //检测温度类型
+    public static final String TYPE_32 = "32_";
+    public static final String TYPE_36 = "36_";
+
     //本地作为服务器的port端口
     public static final int HOTSPOT_PORT = 8282;
     public static final String HOTSPOT_IP = "192.168.43.1";
 
     //报告文档保存路径
-    public static final String REPORT_FOLDER = "/reportDIR/";
+    public static final String REPORT_FOLDER = "/reportBMT/";
 
     //保存到文档里的数据
     public static final String DOC_DATA = "doc_data";

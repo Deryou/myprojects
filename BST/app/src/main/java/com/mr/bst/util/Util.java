@@ -103,7 +103,7 @@ public class Util {
     public static float[] getLightData(String getData) {
         Log.e(TAG, "getLightData: 照度数据" + getData);
         String data = getData.substring(getData.indexOf("ST"));
-        dataInfo = new float[4];
+        dataInfo = new float[3];
         dataInfo[0] = Float.valueOf(data.substring(data.indexOf("Za") + 2, data.indexOf("Zb"))
                 .trim());
         dataInfo[1] = Float.valueOf(data.substring(data.indexOf("Zb") + 2, data.indexOf("DL"))
@@ -121,7 +121,7 @@ public class Util {
      */
     public static float[] getFlowData(String getData) {
         String data = getData.substring(getData.indexOf("end") + 3);
-        dataInfo = new float[5];
+        dataInfo = new float[4];
         dataInfo[0] = Float.valueOf(String.format("%.3f", Float.valueOf(data.substring(data
                         .indexOf("Fa") + 2,
                 data.indexOf("Fb")))));
@@ -249,6 +249,9 @@ public class Util {
         SharedPreferences sharedPreferences = BSTApp.getAppContext()
                 .getSharedPreferences(AppConstant.LOCAL_DATA, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        if (equipNum.isEmpty()) {
+            return;
+        }
         int num = Integer.parseInt(equipNum);
         if (num > 0 && num < 10) {
             editor.putString(AppConstant.EQUIPMENT_NUMBER, "0" + equipNum);

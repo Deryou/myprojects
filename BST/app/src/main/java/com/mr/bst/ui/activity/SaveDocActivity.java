@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -173,8 +172,20 @@ public class SaveDocActivity extends BaseActivity {
                                 InputStream inputStream = getAssets().open("BST-BII.doc");
                                 String demoPath = Util.getDemoDocPath(SaveDocActivity.this)
                                         + "/Temporary_file.doc";
-                                String reportPath = Util.getSDPath(SaveDocActivity.this) +
-                                        AppConstant.REPORT_FOLDER + mInputData.getText().toString()
+
+                                String path = Util.getSDPath(SaveDocActivity
+                                        .this) + AppConstant.REPORT_FOLDER;
+                                File filePath = new File(path);
+                                if (!filePath.exists()) {
+                                    filePath.mkdirs();
+                                }
+                                if (mInputData.getText() == null || mInputData.getText().toString
+                                        ().equals("")) {
+                                    TastyToast.makeText(getApplicationContext(), "文件名称不能为空！",
+                                            TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                                    return;
+                                }
+                                String reportPath = filePath + "/" + mInputData.getText().toString()
                                         + ".doc";
                                 File demoFile = new File(demoPath);
                                 File reportFile = new File(reportPath);
@@ -295,7 +306,7 @@ public class SaveDocActivity extends BaseActivity {
                 mFormCheckPerson.getText().toString());
 
         if (mWgYes.isChecked()) {
-            dataMap.put("$WG$","符合");
+            dataMap.put("$WG$", "符合");
         } else {
             dataMap.put("$WG$", "不符合");
         }

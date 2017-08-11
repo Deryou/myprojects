@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,40 +10,129 @@
 
     <include layout="@layout/toolbar"/>
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/line_chart"
+    <com.mr.bst.widget.DampingScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0"
-        android:layout_weight="1"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="@dimen/dp_0"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/shake_now_data"/>
+                android:layout_marginBottom="@dimen/dp_10"
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/now_shake"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:layout_width="@dimen/dp_0"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shake_now_data"/>
+
+                    <EditText
+                        android:id="@+id/now_shake"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </LinearLayout>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal">
+
+                <EditText
+                    android:id="@+id/start_shake"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:numeric="integer"
+                    android:text="0"
+                    android:textSize="18sp">
+                </EditText>
+
+                <Button
+                    android:id="@+id/get_start_shake"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="开机前振幅"
+                    android:textSize="18sp">
+                </Button>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal">
+
+                <EditText
+                    android:id="@+id/after_shake"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:numeric="integer"
+                    android:text="0"
+                    android:textSize="18sp">
+                </EditText>
+                <Button
+                    android:id="@+id/get_after_shake"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="开机后振幅"
+                    android:textSize="18sp">
+                </Button>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal">
+
+                <EditText
+                    android:id="@+id/shake_ave"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:numeric="integer"
+                    android:text="0"
+                    android:textSize="18sp">
+                </EditText>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="振幅平均值"
+                    android:textSize="18sp">
+                </TextView>
+            </TableRow>
+            </TableLayout>
+            <com.dd.CircularProgressButton
+                android:id="@+id/save_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_20"
+                app:cpb_textComplete="已保存"
+                app:cpb_textIdle="保存当前数据"/>
         </LinearLayout>
-
-        <Button
-            android:id="@+id/write_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/write_data"/>
-    </LinearLayout>
+    </com.mr.bst.widget.DampingScrollView>
 </LinearLayout>

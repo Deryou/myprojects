@@ -11,6 +11,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static android.content.ContentValues.TAG;
 
@@ -29,6 +31,7 @@ public class TcpServer {
     //后面多设备时得改 workThread&&mSocket
     public Thread workThread;
     private Socket mSocket;
+    private ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
 
     /**
      * @param port 要监听的端口
@@ -82,14 +85,10 @@ public class TcpServer {
                         client.mConnectId = new RandomGUID().toString();
                         client.mIsOpen = true;
                         Log.e(TAG, "客户端开始进行连接");
-//                        synchronized (mObject) {
-//                            if (!isCloseConn) {
-//                                mServerCallback.ClientConnected(client);
-//                            }
-//                        }
                         mServerConnCallback.ClientConnected(client);
                         mThreadRun = true;
-                        workThread = new Thread(new Runnable() {
+
+                        cachedThreadPool.execute(new Runnable() {
 
                             @Override
                             public void run() {
@@ -112,7 +111,6 @@ public class TcpServer {
 
                             }
                         });
-                        workThread.start();
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -130,9 +128,7 @@ public class TcpServer {
         if (serverThread.isAlive()) {
             serverThread.interrupt();
         }
-        if (workThread.isAlive()) {
-            workThread.interrupt();
-        }
+       cachedThreadPool.shutdown();
         if (mServerSocket != null) {
             try {
                 close();

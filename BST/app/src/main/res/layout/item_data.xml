@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:text="1"/>
 
-
     <TextView
         android:id="@+id/first_pot"
         android:layout_width="@dimen/dp_0"

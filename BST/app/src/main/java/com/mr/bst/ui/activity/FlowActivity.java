@@ -17,6 +17,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
+import com.dd.CircularProgressButton;
 import com.github.mikephil.charting.charts.LineChart;
 import com.google.gson.Gson;
 import com.mr.bst.R;
@@ -68,6 +69,8 @@ public class FlowActivity extends BaseChartActivity {
     TextView mDownAve;
     @BindView(R.id.up_ave)
     TextView mUpAve;
+    @BindView(R.id.save_data)
+    CircularProgressButton mCircularProgressButton;
 
     private List<List<float[]>> upFlowList = new ArrayList<>();
     private List<List<float[]>> downFlowList = new ArrayList<>();
@@ -91,7 +94,7 @@ public class FlowActivity extends BaseChartActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    TastyToast.makeText(getApplicationContext(), "风速数据请求成功", TastyToast
+                    TastyToast.makeText(getApplicationContext(), "流速数据请求成功", TastyToast
                             .LENGTH_LONG, TastyToast.SUCCESS);
                     break;
                 case 1:
@@ -174,6 +177,7 @@ public class FlowActivity extends BaseChartActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData();
+        sendData();
     }
 
     private void initData() {
@@ -313,84 +317,87 @@ public class FlowActivity extends BaseChartActivity {
                 isEnsure = true;
                 break;
             case R.id.save_data:
-                dataMap = new HashMap<>();
-
-                List<Float> dataUpList = new ArrayList<>();
-                List<Float> dataDownList = new ArrayList<>();
-                float tempData[] = new float[4];
-                String ave_data = "";
-                for (int i = 1; i <= 7; i++) {
-                    if (upFlowList.size() >= i && upFlowList.get(i - 1).size() == 2) {
-                        ave_data = "";
-                        for (int a = 0; a < 2; a++) {
-                            tempData = upFlowList.get(i - 1).get(a);
-                            dataUpList.add(tempData[3]);
-                            if (a < 1) {
-                                ave_data += tempData[3] + "/";
-                            } else {
-                                ave_data += tempData[3];
-                            }
-                            switch (a) {
-                                case 0:
-                                    dataMap.put("$IA_1_" + i + "$", tempData[0] + "," +
-                                            "" + tempData[1] + "," + tempData[2]);
-                                    break;
-                                case 1:
-                                    dataMap.put("$IA_2_" + i + "$", tempData[0] + "," +
-                                            "" + tempData[1] + "," + tempData[2]);
-                                    break;
-                            }
-                        }
-                        dataMap.put("$IA_ave_" + i + "$", ave_data);
-                    } else {
-                        dataMap.put("$IA_1_" + i + "$", "");
-                        dataMap.put("$IA_2_" + i + "$", "");
-                        dataMap.put("$IA_ave_" + i + "$", "");
-                    }
-
-
-                    if (downFlowList.size() >= i && downFlowList.get(i - 1).size() == 3) {
-                        ave_data = "";
-                        for (int a = 0; a < 3; a++) {
-                            tempData = downFlowList.get(i - 1).get(a);
-                            dataDownList.add(tempData[3]);
-                            switch (a) {
-                                case 0:
-                                    dataMap.put("$DA_1_" + i + "$", tempData[0] + "," +
-                                            "" + tempData[1] + "," + tempData[2]);
+                if (mCircularProgressButton.getProgress() == 0) {
+                    dataMap = new HashMap<>();
+                    List<Float> dataUpList = new ArrayList<>();
+                    List<Float> dataDownList = new ArrayList<>();
+                    float tempData[] = new float[4];
+                    String ave_data = "";
+                    for (int i = 1; i <= 7; i++) {
+                        if (upFlowList.size() >= i && upFlowList.get(i - 1).size() == 2) {
+                            ave_data = "";
+                            for (int a = 0; a < 2; a++) {
+                                tempData = upFlowList.get(i - 1).get(a);
+                                dataUpList.add(tempData[3]);
+                                if (a < 1) {
                                     ave_data += tempData[3] + "/";
-                                    break;
-                                case 1:
-                                    dataMap.put("$DA_2_" + i + "$", tempData[0] + "," +
-                                            "" + tempData[1] + "," + tempData[2]);
-                                    ave_data += tempData[3] + "/";
-                                    break;
-                                case 2:
-                                    dataMap.put("$DA_3_" + i + "$", tempData[0] + "," +
-                                            "" + tempData[1] + "," + tempData[2]);
+                                } else {
                                     ave_data += tempData[3];
-                                    break;
+                                }
+                                switch (a) {
+                                    case 0:
+                                        dataMap.put("$IA_1_" + i + "$", tempData[0] + "," +
+                                                "" + tempData[1] + "," + tempData[2]);
+                                        break;
+                                    case 1:
+                                        dataMap.put("$IA_2_" + i + "$", tempData[0] + "," +
+                                                "" + tempData[1] + "," + tempData[2]);
+                                        break;
+                                }
                             }
+                            dataMap.put("$IA_ave_" + i + "$", ave_data);
+                        } else {
+                            dataMap.put("$IA_1_" + i + "$", "");
+                            dataMap.put("$IA_2_" + i + "$", "");
+                            dataMap.put("$IA_ave_" + i + "$", "");
                         }
-                        dataMap.put("$DA_ave_" + i + "$", ave_data);
-                    } else {
-                        dataMap.put("$DA_1_" + i + "$", "");
-                        dataMap.put("$DA_2_" + i + "$", "");
-                        dataMap.put("$DA_3_" + i + "$", "");
-                        dataMap.put("$DA_ave_" + i + "$", "");
-                    }
-                }
-                dataMap.put("$IA_ave_ave$", Util.getListAve(dataUpList) + "");
-                dataMap.put("$DA_ave_ave$", Util.getListAve(dataDownList) + "");
-                mUpAve.setText(Util.getListAve(dataUpList) + "");
-                mDownAve.setText(Util.getListAve(dataDownList) + "");
 
-                Gson gson = new Gson();
-                String testData = gson.toJson(dataMap);
-                Util.saveToDocData(AppConstant.FLOW_DATA, testData);
-                TastyToast.makeText(getApplicationContext(), "数据保存成功", TastyToast.LENGTH_SHORT,
-                        TastyToast.INFO);
-                Log.e(TAG, "onViewClicked: 测试保存的数据：" + testData);
+                        if (downFlowList.size() >= i && downFlowList.get(i - 1).size() == 3) {
+                            ave_data = "";
+                            for (int a = 0; a < 3; a++) {
+                                tempData = downFlowList.get(i - 1).get(a);
+                                dataDownList.add(tempData[3]);
+                                switch (a) {
+                                    case 0:
+                                        dataMap.put("$DA_1_" + i + "$", tempData[0] + "," +
+                                                "" + tempData[1] + "," + tempData[2]);
+                                        ave_data += tempData[3] + "/";
+                                        break;
+                                    case 1:
+                                        dataMap.put("$DA_2_" + i + "$", tempData[0] + "," +
+                                                "" + tempData[1] + "," + tempData[2]);
+                                        ave_data += tempData[3] + "/";
+                                        break;
+                                    case 2:
+                                        dataMap.put("$DA_3_" + i + "$", tempData[0] + "," +
+                                                "" + tempData[1] + "," + tempData[2]);
+                                        ave_data += tempData[3];
+                                        break;
+                                }
+                            }
+                            dataMap.put("$DA_ave_" + i + "$", ave_data);
+                        } else {
+                            dataMap.put("$DA_1_" + i + "$", "");
+                            dataMap.put("$DA_2_" + i + "$", "");
+                            dataMap.put("$DA_3_" + i + "$", "");
+                            dataMap.put("$DA_ave_" + i + "$", "");
+                        }
+                    }
+                    dataMap.put("$IA_ave_ave$", Util.getListAve(dataUpList) + "");
+                    dataMap.put("$DA_ave_ave$", Util.getListAve(dataDownList) + "");
+                    mUpAve.setText(Util.getListAve(dataUpList) + "");
+                    mDownAve.setText(Util.getListAve(dataDownList) + "");
+
+                    Gson gson = new Gson();
+                    String testData = gson.toJson(dataMap);
+                    Util.saveToDocData(AppConstant.FLOW_DATA, testData);
+                    simulateSuccessProgress(mCircularProgressButton);
+                }else {
+                    TastyToast.makeText(getApplicationContext(), "数据已保存，再次点击可重新保存！", TastyToast
+                                    .LENGTH_SHORT,
+                            TastyToast.INFO);
+                    mCircularProgressButton.setProgress(0);
+                }
 //                Type type = new TypeToken<List<List<float[]>>>() {
 //                }.getType();
 //                Gson gs = new Gson();

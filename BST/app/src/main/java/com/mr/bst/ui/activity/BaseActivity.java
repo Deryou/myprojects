@@ -1,5 +1,6 @@
 package com.mr.bst.ui.activity;
 
+import android.animation.ValueAnimator;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.support.annotation.LayoutRes;
@@ -10,8 +11,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.LinearLayout;
 
+import com.dd.CircularProgressButton;
 import com.mr.bst.R;
 
 import butterknife.BindView;
@@ -72,5 +75,19 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected boolean isEmptyString(String text) {
         return TextUtils.isEmpty(text) || text.equals("null");
+    }
+
+    public void simulateSuccessProgress(final CircularProgressButton button) {
+        ValueAnimator widthAnimation = ValueAnimator.ofInt(1, 100);
+        widthAnimation.setDuration(1000);
+        widthAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+        widthAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Integer value = (Integer) animation.getAnimatedValue();
+                button.setProgress(value);
+            }
+        });
+        widthAnimation.start();
     }
 }

@@ -6,14 +6,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.zda.bmt.R;
+import com.zda.bmt.callback.HumidtyCallback;
+
+import butterknife.BindView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HumidityFragment extends Fragment {
+public class HumidityFragment extends BaseFragment implements HumidtyCallback{
 
+    @BindView(R.id.checked_humidity)
+    EditText mCheckedHumidity;
 
     public HumidityFragment() {
         // Required empty public constructor
@@ -25,10 +31,29 @@ public class HumidityFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_humidity, container, false);
+    public int getResId() {
+        return R.layout.fragment_humidity;
     }
 
+    @Override
+    public void setData(float sendData) {
+        setChartData(sendData);
+    }
+
+    @Override
+    public void clearData() {
+        if (mLineChart != null && mLineChart.getData() != null) {
+            mLineChart.clearValues();
+        }
+    }
+
+    @Override
+    public String setDataName(int type) {
+        return "Ha";
+    }
+
+    @Override
+    public String getInputData() {
+        return mCheckedHumidity.getText() == null ? "" : mCheckedHumidity.getText().toString();
+    }
 }

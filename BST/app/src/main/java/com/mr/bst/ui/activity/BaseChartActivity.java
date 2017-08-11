@@ -2,6 +2,7 @@ package com.mr.bst.ui.activity;
 
 import android.graphics.Color;
 import android.os.Message;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -29,6 +30,8 @@ import me.leefeng.promptlibrary.PromptDialog;
  */
 
 public abstract class BaseChartActivity extends BaseActivity implements ServerCallback {
+    private static final String TAG = "BaseChartActivity";
+
     public TcpServer mTcpServer;
     @BindView(R.id.line_chart)
     LineChart mLineChart;
@@ -61,37 +64,8 @@ public abstract class BaseChartActivity extends BaseActivity implements ServerCa
         mTcpServer = TcpServer.getInstance(AppConstant.HOTSPOT_PORT);
         mTcpServer.setServerCallback(this);
 
-        sendData();
+//        sendData();
     }
-
-    /**
-     * 设置图表数据
-     *
-     * @param dataValue 接收到的数据，添加到图中
-     * @param type      数据类型，以便用于分类折线，
-     */
-//    public void setChartData(float dataValue, int type) {
-//        mLineData = mLineChart.getData();
-//        if (mLineData != null) {
-//            ILineDataSet set = mLineData.getDataSetByIndex(type);
-//            if (set == null) {
-//                set = createSet(type);
-//                mLineData.addDataSet(set);
-//            }
-//            mLineData.addEntry(new Entry(set.getEntryCount(), dataValue), type);
-//            mLineData.notifyDataChanged();
-//            mLineChart.notifyDataSetChanged();
-//            mLineChart.setVisibleXRangeMaximum(30);
-//            mLineChart.moveViewToX(mLineData.getEntryCount());
-//        } else {
-//            mLineData = new LineData();
-//            mLineChart.setData(mLineData);
-//            XAxis xl = mLineChart.getXAxis();
-//            xl.setDrawGridLines(false);
-//            xl.setAvoidFirstLastClipping(true);
-//            xl.setEnabled(true);
-//        }
-//    }
 
     /**
      * 设置图表数据
@@ -104,6 +78,7 @@ public abstract class BaseChartActivity extends BaseActivity implements ServerCa
             for (int i = 0; i < dataValue.length - 1; i++) {
                 ILineDataSet set = mLineData.getDataSetByIndex(i);
                 if (set == null) {
+                    Log.e(TAG, "setChartData: "+dataValue.length+">>>>>>>>>>>>>"+i );
                     set = createSet(i);
                     mLineData.addDataSet(set);
                 }
@@ -140,15 +115,17 @@ public abstract class BaseChartActivity extends BaseActivity implements ServerCa
     public ILineDataSet createSet(int type) {
         LineDataSet set = new LineDataSet(null, setDataName(type));
         set.setAxisDependency(AxisDependency.LEFT);
+
+        Log.e(TAG, "createSet: "+type+"<-------->");
         switch (type) {
             case 0:
-                set.setColor(ColorTemplate.LIBERTY_COLORS[0]);
+                set.setColor(ColorTemplate.COLORFUL_COLORS[0]);
                 break;
             case 1:
-                set.setColor(ColorTemplate.LIBERTY_COLORS[1]);
+                set.setColor(ColorTemplate.COLORFUL_COLORS[1]);
                 break;
             case 2:
-                set.setColor(ColorTemplate.LIBERTY_COLORS[2]);
+                set.setColor(ColorTemplate.COLORFUL_COLORS[2]);
                 break;
             default:
                 break;
@@ -157,8 +134,6 @@ public abstract class BaseChartActivity extends BaseActivity implements ServerCa
         set.setLineWidth(2f);
 //        set.setCircleColor(Color.WHITE);
 //        set.setCircleRadius(2f);
-        set.setDrawCircles(false);
-        set.setDrawCircles(false);
         set.setDrawCircles(false);
         set.setFillAlpha(65);
         set.setFillColor(ColorTemplate.getHoloBlue());
@@ -196,12 +171,12 @@ public abstract class BaseChartActivity extends BaseActivity implements ServerCa
                             mMEditDialog = new MEditDialog(BaseChartActivity.this);
                             mMEditDialog.setTitle("请输入当前设备的编号！")
                                     .setTitleRow2("设备编号：");
-                            final String equipNum = mMEditDialog.getTitleRow2Msg();
                             mMEditDialog.setOnEnsureClickListener("YES", new MEditDialog
                                     .onEnsureClickListener() {
 
                                 @Override
                                 public void onEnsureClick() {
+                                    final String equipNum = mMEditDialog.getETRow2();
                                     if (equipNum != null) {
                                         Util.saveEquipNum(equipNum);
                                         sendRequestData(equipNum);

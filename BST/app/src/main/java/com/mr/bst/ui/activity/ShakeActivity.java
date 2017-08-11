@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.dd.CircularProgressButton;
 import com.mr.bst.R;
 import com.mr.bst.util.TcpClient;
 import com.mr.bst.util.Util;
@@ -21,18 +23,33 @@ public class ShakeActivity extends BaseChartActivity {
 
     @BindView(R.id.now_shake)
     EditText mNowShake;
-    @BindView(R.id.write_data)
-    Button mWriteData;
     @BindView(R.id.custom_title)
     TextView mCustomTitle;
-    private float shakeData[];
+    @BindView(R.id.start_shake)
+    EditText mStartShake;
+    @BindView(R.id.get_start_shake)
+    Button mGetStartShake;
+    @BindView(R.id.after_shake)
+    EditText mAfterShake;
+    @BindView(R.id.get_after_shake)
+    Button mGetAfterShake;
+    @BindView(R.id.shake_ave)
+    EditText mShakeAve;
+    @BindView(R.id.save_btn)
+    CircularProgressButton mSaveBtn;
+
+    private float startShake = 0;
+    private float afterShake = 0;
+    private float shake_ave = 0;
+
+    private float shakeData[] = new float[1];
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0) {
                 TastyToast.makeText(getApplicationContext(), "温压数据请求成功", TastyToast
                         .LENGTH_LONG, TastyToast.SUCCESS);
-            } else if (msg.what == 1){
+            } else if (msg.what == 1) {
                 setChartData(shakeData);
                 mNowShake.setText(shakeData + "");
             }
@@ -47,6 +64,7 @@ public class ShakeActivity extends BaseChartActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sendData();
     }
 
     @Override
@@ -83,9 +101,13 @@ public class ShakeActivity extends BaseChartActivity {
                     msg.what = 0;
                 }
             }
-        } else if (sendData.trim().endsWith("end")){
-            shakeData = Util.getShakeData(sendData);
-            msg.what = 1;
+        } else if (sendData.trim().endsWith("end")) {
+            if (sendData.contains("Da")) {
+                shakeData = Util.getShakeData(sendData);
+                msg.what = 1;
+            }
+        } else {
+            msg.what = 2;
         }
         mHandler.sendMessage(msg);
     }
@@ -100,7 +122,21 @@ public class ShakeActivity extends BaseChartActivity {
         mTcpServer.openConn(false);
     }
 
-    @OnClick(R.id.write_data)
-    public void onViewClicked() {
+    @OnClick({R.id.get_start_shake, R.id.get_after_shake, R.id.save_btn})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.get_start_shake:
+                startShake = shakeData[0];
+                mStartShake.setText(startShake + "");
+                break;
+            case R.id.get_after_shake:
+                afterShake = shakeData[0];
+                mAfterShake.setText(afterShake + "");
+                break;
+            case R.id.save_btn:
+                shake_ave =Math.round((afterShake + startShake)/2 * 10) / 10f;
+                mShakeAve.setText(shake_ave + "");
+                break;
+        }
     }
 }

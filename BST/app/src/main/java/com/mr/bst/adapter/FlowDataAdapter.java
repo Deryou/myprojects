@@ -15,30 +15,34 @@ import java.util.List;
 
 public class FlowDataAdapter extends BaseItemDraggableAdapter<List<float[]>, BaseViewHolder> {
     public FlowDataAdapter(@Nullable List<List<float[]>> data) {
-        super(R.layout.item_data, data);
+        super(R.layout.item_data_flow, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, List<float[]> item) {
         String ave = "";
-        helper.setText(R.id.item_id, "第" + (helper.getLayoutPosition() + 1) + "点:");
         for (int i = 0; i < item.size(); i++) {
             float data[] = item.get(i);
             switch (i) {
                 case 0:
-                    helper.setText(R.id.first_pot, data[0]+ ","+data[1]+","+data[2]);
-                    ave += data[3]+"/";
+                    helper.setText(R.id.r1_c1, data[0] + "");
+                    helper.setText(R.id.r2_c1, data[1] + "");
+                    helper.setText(R.id.r3_c1, data[2] + "");
+                    helper.setText(R.id.ave_c1, data[3] + "");
                     break;
                 case 1:
-                    helper.setText(R.id.second_pot,data[0]+ ","+data[1]+","+data[2]);
-                    ave += data[3]+"/";
+                    helper.setText(R.id.r1_c2, data[0] + "");
+                    helper.setText(R.id.r2_c2, data[1] + "");
+                    helper.setText(R.id.r3_c2, data[2] + "");
+                    helper.setText(R.id.ave_c2, data[3] + "");
                     break;
                 case 2:
-                    helper.setText(R.id.third_pot, data[0]+ ","+data[1]+","+data[2]);
-                    ave += data[3];
+                    helper.setText(R.id.r1_c3, data[0] + "");
+                    helper.setText(R.id.r2_c3, data[1] + "");
+                    helper.setText(R.id.r3_c3, data[2] + "");
+                    helper.setText(R.id.ave_c3, data[3] + "");
                     break;
             }
-            helper.setText(R.id.ave_pot, ave);
         }
     }
 }

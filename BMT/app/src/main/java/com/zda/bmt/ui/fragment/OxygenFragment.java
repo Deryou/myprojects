@@ -1,19 +1,19 @@
 package com.zda.bmt.ui.fragment;
 
-import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.EditText;
 
 import com.zda.bmt.R;
+import com.zda.bmt.callback.OxygenCallback;
+
+import butterknife.BindView;
 
 /**
  *
  */
-public class OxygenFragment extends Fragment {
+public class OxygenFragment extends BaseFragment implements OxygenCallback {
+
+    @BindView(R.id.checked_oxygen)
+    EditText mCheckedOxygen;
 
     public OxygenFragment() {
         // Required empty public constructor
@@ -26,12 +26,30 @@ public class OxygenFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_oxygen, container, false);
+    public int getResId() {
+        return R.layout.fragment_oxygen;
     }
 
 
+    @Override
+    public void setData(float sendData) {
+        setChartData(sendData);
+    }
 
+    @Override
+    public void clearData() {
+        if (mLineChart != null && mLineChart.getData() != null) {
+            mLineChart.clearValues();
+        }
+    }
+
+    @Override
+    public String getInputData() {
+        return mCheckedOxygen == null ? "" : mCheckedOxygen.getText().toString();
+    }
+
+    @Override
+    public String setDataName(int type) {
+        return "Oa";
+    }
 }

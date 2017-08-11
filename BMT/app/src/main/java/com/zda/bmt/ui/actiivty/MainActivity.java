@@ -49,6 +49,7 @@ public class MainActivity extends BaseActivity implements ServerConnCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mToolbar.setNavigationIcon(null);
         initData();
         setDialog();
     }
@@ -180,7 +181,12 @@ public class MainActivity extends BaseActivity implements ServerConnCallback {
 
     @Override
     public void ClientConnected(TcpClient client) {
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TastyToast.makeText(getApplicationContext(), "设备已连接", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+            }
+        });
     }
 
     @OnClick({R.id.equip_setting, R.id.equipment})
