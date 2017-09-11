@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.zda.duonews.di.component.AppComponent;
 import com.zda.duonews.di.component.DaggerAppComponent;
+import com.zda.duonews.di.module.AppModule;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -59,10 +60,12 @@ public class App extends Application{
         System.exit(0);
     }
 
-//    public static AppComponent getAppcomponent() {
-//        if (appComponent == null) {
-////            appComponent = DaggerAppComponent.builder()
-//
-//        }
-//    }
+    public static AppComponent getAppcomponent() {
+        if (appComponent == null) {
+            appComponent = DaggerAppComponent.builder()
+                    .appModule(new AppModule(instance))
+                    .build();
+        }
+        return appComponent;
+    }
 }

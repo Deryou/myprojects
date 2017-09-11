@@ -18,8 +18,8 @@ public class ActivityModule {
         this.mActivity = activity;
     }
 
-    @Provides
     @ActivityScope
+    @Provides
     public Activity provideActivity() {
         return mActivity;
     }

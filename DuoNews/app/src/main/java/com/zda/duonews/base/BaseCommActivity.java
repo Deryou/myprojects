@@ -42,11 +42,14 @@ public abstract class BaseCommActivity extends SupportActivity{
         });
     }
 
-    protected abstract void initEventAndData();
-
-    private void initView() {
+    protected void initView() {
 
     }
+
+    /**
+     * 初始化监听事件和数据
+     */
+    protected abstract void initEventAndData();
 
     protected abstract int getLayout();
 
