@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context="com.mr.mrdetect.ui.activity.ControlerAddActivity">
+
+    <include layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_50">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/product_name"/>
+
+        <EditText
+            android:id="@+id/product_name"
+            android:layout_width="@dimen/dp_240"
+            android:layout_height="wrap_content"
+            android:hint="请选择产品名称"
+            android:maxLines="1"
+            android:layout_marginLeft="@dimen/dp_20"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/equipment_desc"/>
+
+        <EditText
+            android:id="@+id/equip_desc"
+            android:layout_width="@dimen/dp_240"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_marginLeft="@dimen/dp_20"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/equipment_guid"/>
+
+        <EditText
+            android:id="@+id/equip_guid"
+            android:layout_width="@dimen/dp_240"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_marginLeft="@dimen/dp_20"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/is_invalidate"/>
+
+        <RadioGroup
+            android:layout_width="@dimen/dp_240"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/effective"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="有效"/>
+
+            <RadioButton
+                android:id="@+id/no_effective"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="无效"/>
+        </RadioGroup>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/oval_shape"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        android:layout_margin="@dimen/dp_20"
+        android:text="提    交"/>
+</LinearLayout>
